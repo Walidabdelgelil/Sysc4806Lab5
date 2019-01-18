@@ -1,9 +1,6 @@
 package buddies;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +8,7 @@ import java.util.List;
 public class AddressBook {
 
     @Id
+    @GeneratedValue
     private Integer id = null;
 
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -37,7 +35,7 @@ public class AddressBook {
     /**
      * @return The buddy info list
      */
-    protected List<BuddyInfo> getBuddyInfoList() {
+    public List<BuddyInfo> getBuddyInfoList() {
         return buddyInfoList;
     }
 
@@ -46,7 +44,7 @@ public class AddressBook {
      *
      * @param buddyInfoList
      */
-    protected void setBuddyInfoList(List<BuddyInfo> buddyInfoList) {
+    public void setBuddyInfoList(List<BuddyInfo> buddyInfoList) {
         this.buddyInfoList = buddyInfoList;
     }
 
@@ -110,24 +108,7 @@ public class AddressBook {
 
         AddressBook otherBook = (AddressBook) o;
 
-        if (otherBook.id != null && this.id != null)
-            return otherBook.id.equals(this.id);
-
         // Delegate equals to the array list if the object has no ID
         return this.buddyInfoList.equals(otherBook.buddyInfoList);
-    }
-
-    public static void main(String[] args) {
-        AddressBook addressBook = new AddressBook();
-
-        // Create our buddies
-        BuddyInfo michaelInfo = new BuddyInfo("Michael", "School", "555-1234");
-        BuddyInfo babakInfo = new BuddyInfo("Babak", "Home", "555-1244");
-
-        // Add buddies to our address book
-        addressBook.addBuddy(michaelInfo);
-        addressBook.addBuddy(babakInfo);
-
-        System.out.println(addressBook);
     }
 }

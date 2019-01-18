@@ -13,7 +13,6 @@ public class AddressBookTest {
     @Before
     public void setUp() {
         addressBook = new AddressBook();
-        addressBook.setId(1);
 
         fakeBuddyOne = new BuddyInfo("Fake Buddy 1", "", "");
         fakeBuddyTwo = new BuddyInfo("Fake Buddy 2", "", "");
@@ -67,12 +66,9 @@ public class AddressBookTest {
 
     @Test
     public void testEquals() {
-        AddressBook addressBookEqualsId = new AddressBook();
         AddressBook addressBookEqualsWithoutId = new AddressBook();
         AddressBook addressBookEmpty = new AddressBook();
         AddressBook addressBookNotEquals = new AddressBook();
-
-        addressBookEqualsId.setId(addressBook.getId());
 
         // Add buddies to address book
         addressBook.addBuddy(fakeBuddyOne);
@@ -85,7 +81,6 @@ public class AddressBookTest {
         // Add buddies to non-equivalent address book
         addressBookNotEquals.addBuddy(fakeBuddyOne);
 
-        assertEquals(addressBook, addressBookEqualsId);
         assertEquals(addressBook, addressBookEqualsWithoutId);
         assertNotEquals(addressBook, addressBookNotEquals);
         assertNotEquals(addressBook, addressBookEmpty);

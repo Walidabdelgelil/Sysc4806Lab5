@@ -1,12 +1,14 @@
 package buddies;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class BuddyInfo {
 
     @Id
+    @GeneratedValue
     private Integer id = null;
 
     private String name;
@@ -120,9 +122,6 @@ public class BuddyInfo {
             return false;
 
         BuddyInfo otherBuddy = (BuddyInfo) o;
-
-        if(otherBuddy.id != null && this.id != null)
-            return otherBuddy.id.equals(this.id);
 
         return this.name.equals(otherBuddy.name)
                 && this.phoneNumber.equals(otherBuddy.phoneNumber)

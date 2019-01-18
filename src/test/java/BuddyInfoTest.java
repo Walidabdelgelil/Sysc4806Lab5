@@ -14,7 +14,6 @@ public class BuddyInfoTest {
     @Before
     public void setUp() {
         buddyInfo = new BuddyInfo(TEST_NAME, TEST_ADDRESS, TEST_PHONE);
-        buddyInfo.setId(1);
     }
 
     @Test
@@ -64,13 +63,9 @@ public class BuddyInfoTest {
 
     @Test
     public void testEquals() {
-        BuddyInfo buddyInfoEqualsId = new BuddyInfo("", "", "");
         BuddyInfo buddyInfoEqualsWithoutId = new BuddyInfo(buddyInfo.getName(), buddyInfo.getAddress(), buddyInfo.getPhoneNumber());
         BuddyInfo buddyInfoNotEquals = new BuddyInfo(buddyInfo.getName(), "", "");
 
-        buddyInfoEqualsId.setId(buddyInfo.getId());
-
-        assertEquals(buddyInfo, buddyInfoEqualsId);
         assertEquals(buddyInfo, buddyInfoEqualsWithoutId);
         assertNotEquals(buddyInfo, buddyInfoNotEquals);
     }

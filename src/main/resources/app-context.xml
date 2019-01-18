@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="itemScrollPane" class="javax.swing.JScrollPane">
+        <constructor-arg ref="addressBookTable"/>
+    </bean>
+
+    <bean id="buddyOne" class="buddies.BuddyInfo">
+        <property name="id" value="1"/>
+        <property name="name" value="Michael"/>
+        <property name="address" value="Carleton"/>
+        <property name="phoneNumber" value="555-555-5555"/>
+    </bean>
+
+
+    <bean id="buddyInfoList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list value-type="buddies.BuddyInfo">
+                <ref bean="buddyOne"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="addressBook" class="buddies.AddressBook">
+        <property name="buddyInfoList" ref="buddyInfoList"/>
+    </bean>
+
+    <bean id="addressBookTableModel" class="buddies.ui.model.AddressBookTableModel">
+        <constructor-arg ref="addressBook"/>
+    </bean>
+
+    <bean id="addressBookTable" class="javax.swing.JTable">
+        <property name="model" ref="addressBookTableModel"/>
+    </bean>
+
+    <bean id="addBuddyActionListener" class="buddies.ui.button.AddBuddyButtonActionListener">
+        <constructor-arg ref="addressBookTableModel"/>
+    </bean>
+
+    <bean id="addBuddyButton" class="buddies.ui.button.ActionListenerButton">
+        <constructor-arg ref="addBuddyActionListener"/>
+        <property name="text" value="Add Buddy"/>
+    </bean>
+
+    <bean id="removeBuddyActionListener" class="buddies.ui.button.RemoveBuddyButtonActionListener">
+        <constructor-arg ref="addressBookTable"/>
+    </bean>
+
+    <bean id="removeBuddyButton" class="buddies.ui.button.ActionListenerButton">
+        <constructor-arg ref="removeBuddyActionListener"/>
+        <property name="text" value="Remove Buddy"/>
+    </bean>
+
+    <bean id="buttonPanel" class="buddies.ui.BoxLayoutPanel" init-method="init">
+        <property name="axis" value="0"/>
+        <property name="panelComponents">
+            <list>
+                <ref bean="addBuddyButton"/>
+                <ref bean="removeBuddyButton"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="mainPanel" class="buddies.ui.BoxLayoutPanel" init-method="init">
+        <property name="axis" value="1"/>
+        <property name="panelComponents">
+            <list>
+                <ref bean="itemScrollPane"/>
+                <ref bean="buttonPanel"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="mainFrame" class="buddies.ui.AddressBookFrame" init-method="init">
+        <property name="title" value="Buddy Manager"/>
+        <property name="contentPane" ref="mainPanel"/>
+    </bean>
+
+</beans>
+

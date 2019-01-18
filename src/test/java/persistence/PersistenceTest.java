@@ -36,14 +36,11 @@ public class PersistenceTest {
 
         // Creating two buddies
         buddyOne = new BuddyInfo("Buddy One", "", "");
-        buddyOne.setId(1);
 
         buddyTwo = new BuddyInfo("Buddy Two", "", "");
-        buddyTwo.setId(2);
 
         // Create the address book
         addressBook = new AddressBook();
-        addressBook.setId(1);
     }
 
     @After
