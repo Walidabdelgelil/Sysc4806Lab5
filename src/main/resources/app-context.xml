@@ -7,7 +7,7 @@
         <constructor-arg ref="addressBookTable"/>
     </bean>
 
-    <bean id="buddyOne" class="buddies.BuddyInfo">
+    <bean id="buddyOne" class="application.model.BuddyInfo">
         <property name="id" value="1"/>
         <property name="name" value="Michael"/>
         <property name="address" value="Carleton"/>
@@ -17,18 +17,18 @@
 
     <bean id="buddyInfoList" class="java.util.ArrayList">
         <constructor-arg>
-            <list value-type="buddies.BuddyInfo">
+            <list value-type="application.model.BuddyInfo">
                 <ref bean="buddyOne"/>
             </list>
         </constructor-arg>
     </bean>
 
 
-    <bean id="addressBook" class="buddies.AddressBook">
+    <bean id="addressBook" class="application.model.AddressBook">
         <property name="buddyInfoList" ref="buddyInfoList"/>
     </bean>
 
-    <bean id="addressBookTableModel" class="buddies.ui.model.AddressBookTableModel">
+    <bean id="addressBookTableModel" class="application.ui.model.AddressBookTableModel">
         <constructor-arg ref="addressBook"/>
     </bean>
 
@@ -36,25 +36,25 @@
         <property name="model" ref="addressBookTableModel"/>
     </bean>
 
-    <bean id="addBuddyActionListener" class="buddies.ui.button.AddBuddyButtonActionListener">
+    <bean id="addBuddyActionListener" class="application.ui.button.AddBuddyButtonActionListener">
         <constructor-arg ref="addressBookTableModel"/>
     </bean>
 
-    <bean id="addBuddyButton" class="buddies.ui.button.ActionListenerButton">
+    <bean id="addBuddyButton" class="application.ui.button.ActionListenerButton">
         <constructor-arg ref="addBuddyActionListener"/>
         <property name="text" value="Add Buddy"/>
     </bean>
 
-    <bean id="removeBuddyActionListener" class="buddies.ui.button.RemoveBuddyButtonActionListener">
+    <bean id="removeBuddyActionListener" class="application.ui.button.RemoveBuddyButtonActionListener">
         <constructor-arg ref="addressBookTable"/>
     </bean>
 
-    <bean id="removeBuddyButton" class="buddies.ui.button.ActionListenerButton">
+    <bean id="removeBuddyButton" class="application.ui.button.ActionListenerButton">
         <constructor-arg ref="removeBuddyActionListener"/>
         <property name="text" value="Remove Buddy"/>
     </bean>
 
-    <bean id="buttonPanel" class="buddies.ui.BoxLayoutPanel" init-method="init">
+    <bean id="buttonPanel" class="application.ui.BoxLayoutPanel" init-method="init">
         <property name="axis" value="0"/>
         <property name="panelComponents">
             <list>
@@ -64,7 +64,7 @@
         </property>
     </bean>
 
-    <bean id="mainPanel" class="buddies.ui.BoxLayoutPanel" init-method="init">
+    <bean id="mainPanel" class="application.ui.BoxLayoutPanel" init-method="init">
         <property name="axis" value="1"/>
         <property name="panelComponents">
             <list>
@@ -74,7 +74,7 @@
         </property>
     </bean>
 
-    <bean id="mainFrame" class="buddies.ui.AddressBookFrame" init-method="init">
+    <bean id="mainFrame" class="application.ui.AddressBookFrame" init-method="init">
         <property name="title" value="Buddy Manager"/>
         <property name="contentPane" ref="mainPanel"/>
     </bean>

@@ -1,7 +1,7 @@
-package buddies.ui.button;
+package application.ui.button;
 
-import buddies.AddressBook;
-import buddies.ui.model.AddressBookTableModel;
+import application.model.AddressBook;
+import application.ui.model.AddressBookTableModel;
 
 import java.awt.event.ActionListener;
 

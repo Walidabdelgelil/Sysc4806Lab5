@@ -1,4 +1,4 @@
-package buddies.ui;
+package application.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BoxLayoutPanel extends JPanel {
     /**
-     * We can't use "ui" as the property name,
+     * We can't use "application.ui" as the property name,
      * because it conflicts with an existing property
      * on the Component superclass.
      */

@@ -1,4 +1,4 @@
-package buddies;
+package application.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ public class AddressBook {
 
     @Id
     @GeneratedValue
-    private Integer id = null;
+    private Long id = null;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<BuddyInfo> buddyInfoList;
 
     /**
@@ -21,14 +21,14 @@ public class AddressBook {
         this.buddyInfoList = new ArrayList<>();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id Set the ID for database persistence
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

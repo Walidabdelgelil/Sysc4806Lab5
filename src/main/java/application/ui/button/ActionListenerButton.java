@@ -1,4 +1,4 @@
-package buddies.ui.button;
+package application.ui.button;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

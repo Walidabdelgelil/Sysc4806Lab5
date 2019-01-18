@@ -1,15 +1,13 @@
-package buddies;
+package application.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class BuddyInfo {
 
     @Id
     @GeneratedValue
-    private Integer id = null;
+    private Long id = null;
 
     private String name;
     private String address;
@@ -28,16 +26,15 @@ public class BuddyInfo {
         this.phoneNumber = phoneNumber;
     }
 
-    protected BuddyInfo()
-    {
+    protected BuddyInfo() {
         // Empty constructor
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -110,15 +107,16 @@ public class BuddyInfo {
 
     /**
      * Compares with the object IDs if non-null. Otherwise, the class information is compared (name, etc.)
+     *
      * @param o The other object to check for equivalence
      * @return True if both objects are equivalent.
      */
     @Override
     public boolean equals(Object o) {
-        if(o == this)
+        if (o == this)
             return true;
 
-        if(!(o instanceof BuddyInfo))
+        if (!(o instanceof BuddyInfo))
             return false;
 
         BuddyInfo otherBuddy = (BuddyInfo) o;

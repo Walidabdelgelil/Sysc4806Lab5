@@ -1,9 +1,8 @@
 package persistence;
 
-import buddies.AddressBook;
-import buddies.BuddyInfo;
+import application.model.AddressBook;
+import application.model.BuddyInfo;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +33,7 @@ public class PersistenceTest {
 
         this.transaction = entityManager.getTransaction();
 
-        // Creating two buddies
+        // Creating two application.model
         buddyOne = new BuddyInfo("Buddy One", "", "");
 
         buddyTwo = new BuddyInfo("Buddy Two", "", "");
@@ -62,7 +61,7 @@ public class PersistenceTest {
         transaction.commit();
 
         // Query the entities
-        Query q = entityManager.createQuery("SELECT a FROM AddressBook a");
+        Query q = entityManager.createQuery("SELECT a FROM model.AddressBook a");
 
         // Only one address book should exist
         List<AddressBook> results = q.getResultList();
@@ -89,7 +88,7 @@ public class PersistenceTest {
         transaction.commit();
 
         // Get the buddy info entities
-        Query q = entityManager.createQuery("SELECT b FROM BuddyInfo b");
+        Query q = entityManager.createQuery("SELECT b FROM model.BuddyInfo b");
 
         List<BuddyInfo> results = q.getResultList();
 

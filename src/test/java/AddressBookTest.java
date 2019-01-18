@@ -1,5 +1,5 @@
-import buddies.AddressBook;
-import buddies.BuddyInfo;
+import application.model.AddressBook;
+import application.model.BuddyInfo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class AddressBookTest {
     @Test
     public void removeBuddy() {
         // Test both removeBuddy method overloads
-        // Add both buddies to address book
+        // Add both application.model to address book
         addressBook.addBuddy(fakeBuddyOne);
         addressBook.addBuddy(fakeBuddyTwo);
         assertEquals(2, addressBook.size());
@@ -54,7 +54,7 @@ public class AddressBookTest {
 
     @Test
     public void testToString() {
-        // Add buddies to address book
+        // Add application.model to address book
         addressBook.addBuddy(fakeBuddyOne);
         addressBook.addBuddy(fakeBuddyTwo);
 
@@ -70,15 +70,15 @@ public class AddressBookTest {
         AddressBook addressBookEmpty = new AddressBook();
         AddressBook addressBookNotEquals = new AddressBook();
 
-        // Add buddies to address book
+        // Add application.model to address book
         addressBook.addBuddy(fakeBuddyOne);
         addressBook.addBuddy(fakeBuddyTwo);
 
-        // Add buddies to equivalent address book
+        // Add application.model to equivalent address book
         addressBookEqualsWithoutId.addBuddy(fakeBuddyOne);
         addressBookEqualsWithoutId.addBuddy(fakeBuddyTwo);
 
-        // Add buddies to non-equivalent address book
+        // Add application.model to non-equivalent address book
         addressBookNotEquals.addBuddy(fakeBuddyOne);
 
         assertEquals(addressBook, addressBookEqualsWithoutId);

@@ -1,7 +1,7 @@
-package buddies.ui.model;
+package application.ui.model;
 
-import buddies.AddressBook;
-import buddies.BuddyInfo;
+import application.model.AddressBook;
+import application.model.BuddyInfo;
 
 import javax.swing.table.AbstractTableModel;
 
