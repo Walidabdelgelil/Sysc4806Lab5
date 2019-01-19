@@ -11,7 +11,8 @@ public class AddressBook {
     @GeneratedValue
     private Long id = null;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderColumn
     private List<BuddyInfo> buddyInfoList;
 
     /**

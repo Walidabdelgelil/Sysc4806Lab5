@@ -26,8 +26,8 @@ public class BuddyInfo {
         this.phoneNumber = phoneNumber;
     }
 
-    protected BuddyInfo() {
-        // Empty constructor
+    public BuddyInfo() {
+        this("", "", "");
     }
 
     public Long getId() {

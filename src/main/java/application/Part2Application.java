@@ -18,7 +18,7 @@ public class Part2Application {
     private static final Logger log = LoggerFactory.getLogger(Part2Application.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Part2Application.class);
+        SpringApplication.run(Part2Application.class, args);
     }
 
     @Bean

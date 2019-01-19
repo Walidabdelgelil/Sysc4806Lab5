@@ -1,22 +1,41 @@
 package persistence;
 
+import application.Part2Application;
 import application.model.AddressBook;
 import application.model.BuddyInfo;
+import application.model.repository.AddressBookRepository;
+import application.model.repository.BuddyInfoRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Part2Application.class)
 public class PersistenceTest {
 
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
-    private EntityTransaction transaction;
+    @Autowired
+    private AddressBookRepository addressBookRepository;
+
+    @Autowired
+    private BuddyInfoRepository buddyInfoRepository;
+
     private BuddyInfo buddyOne;
     private BuddyInfo buddyTwo;
     private AddressBook addressBook;
@@ -25,72 +44,74 @@ public class PersistenceTest {
     @Before
     public void setUp()
     {
-        // Connecting to the database through EntityManagerFactory
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa-test");
+        addressBookRepository.deleteAll();
+        buddyInfoRepository.deleteAll();
 
-        // Create the entity manager and the transaction
-        this.entityManager = entityManagerFactory.createEntityManager();
-
-        this.transaction = entityManager.getTransaction();
-
-        // Creating two application.model
-        buddyOne = new BuddyInfo("Buddy One", "", "");
-
-        buddyTwo = new BuddyInfo("Buddy Two", "", "");
+        // Creating two buddies
+        buddyOne = new BuddyInfo("Buddy One", "Addr1", "123");
+        buddyTwo = new BuddyInfo("Buddy Two", "Addr2", "1234");
 
         // Create the address book
         addressBook = new AddressBook();
-    }
 
-    @After
-    public void tearDown()
-    {
-        // Close connection before asserting
-        entityManager.close();
-        entityManagerFactory.close();
+        addressBook.addBuddy(buddyOne);
+        addressBook.addBuddy(buddyTwo);
+
+        addressBook = addressBookRepository.save(addressBook);
     }
 
     @Test
     public void testAddressBookCascadePersistence() {
-        addressBook.addBuddy(buddyOne);
-        addressBook.addBuddy(buddyTwo);
 
-        // Persist the address book without persisting the buddy info objects (cascading persistence)
-        transaction.begin();
-        entityManager.persist(addressBook);
-        transaction.commit();
-
-        // Query the entities
-        Query q = entityManager.createQuery("SELECT a FROM model.AddressBook a");
-
-        // Only one address book should exist
-        List<AddressBook> results = q.getResultList();
+        List<AddressBook> results = (List<AddressBook>) addressBookRepository.findAll();
         assertEquals(1, results.size());
 
         AddressBook addressBookResult = results.get(0);
 
         // Address book should be equivalent to the initial address book object
-        // (This will only end up comparing IDs, so lets compare the buddy list size below)
         assertEquals(addressBook, addressBookResult);
-        assertEquals(addressBook.size(), addressBookResult.size());
-
-
     }
 
     @Test
+    public void testAddressBookFindByBuddyInfo() {
+
+        List<AddressBook> results = addressBookRepository.findByBuddyInfoListContaining(buddyOne);
+        assertEquals(1, results.size());
+
+        AddressBook addressBookResult = results.get(0);
+
+        // Address book should be equivalent to the initial address book object
+        assertEquals(addressBook, addressBookResult);
+    }
+
+    @Test
+    public void testBuddyFindByName() {
+        List<BuddyInfo> results = buddyInfoRepository.findByName(buddyOne.getName());
+
+        assertEquals(1, results.size());
+        assertTrue(results.contains(buddyOne));
+    }
+
+    @Test
+    public void testBuddyFindByAddress() {
+        List<BuddyInfo> results = buddyInfoRepository.findByAddress(buddyOne.getAddress());
+
+        assertEquals(1, results.size());
+        assertTrue(results.contains(buddyOne));
+    }
+
+    @Test
+    public void testBuddyFindByPhoneNumber() {
+        List<BuddyInfo> results = buddyInfoRepository.findByPhoneNumber(buddyOne.getPhoneNumber());
+
+        assertEquals(1, results.size());
+        assertTrue(results.contains(buddyOne));
+    }
+
+
+    @Test
     public void testBuddyPersistence() {
-        transaction.begin();
-
-        // Persisting the buddy info entity objects
-        entityManager.persist(buddyOne);
-        entityManager.persist(buddyTwo);
-
-        transaction.commit();
-
-        // Get the buddy info entities
-        Query q = entityManager.createQuery("SELECT b FROM model.BuddyInfo b");
-
-        List<BuddyInfo> results = q.getResultList();
+        List<BuddyInfo> results = (ArrayList<BuddyInfo>) buddyInfoRepository.findAll();
 
         assertEquals(2, results.size());
         assertTrue(results.contains(buddyOne));
