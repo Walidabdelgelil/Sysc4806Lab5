@@ -1,33 +1,25 @@
-package persistence;
+package application.persistence;
 
-import application.Part2Application;
+import application.Application;
 import application.model.AddressBook;
 import application.model.BuddyInfo;
 import application.model.repository.AddressBookRepository;
 import application.model.repository.BuddyInfoRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Part2Application.class)
+@SpringBootTest(classes = Application.class)
 public class PersistenceTest {
 
     @Autowired

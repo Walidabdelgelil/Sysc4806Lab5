@@ -27,7 +27,7 @@ public class AddressBook {
     }
 
     /**
-     * @param id Set the ID for database persistence
+     * @param id Set the ID for database application.persistence
      */
     public void setId(Long id) {
         this.id = id;
