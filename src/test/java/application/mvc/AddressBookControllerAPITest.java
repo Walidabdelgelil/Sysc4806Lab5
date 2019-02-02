@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerAPITest {
+public class AddressBookControllerAPITest {
 
     private static final String ADDRESS_BOOKS_ROOT_PATH = "addressBooks";
     private static final String BUDDIES_ROOT_PATH = "buddies";
