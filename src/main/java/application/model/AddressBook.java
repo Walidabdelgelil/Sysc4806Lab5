@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class AddressBook {
+public class
+
+
+
+
+AddressBook {
 
     @Id
     @GeneratedValue
